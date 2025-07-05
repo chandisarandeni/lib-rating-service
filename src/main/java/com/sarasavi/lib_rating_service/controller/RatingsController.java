@@ -4,10 +4,7 @@ import com.sarasavi.lib_rating_service.dto.RatingsDTO;
 import com.sarasavi.lib_rating_service.service.RatingsService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,6 +25,13 @@ public class RatingsController {
     public List<RatingsDTO> getAllRatings() {
         return ratingsService.getAllRatings();
     }
+
+    //view ratings by member id
+    @GetMapping(path = "/ratings/member/{memberId}")
+    public List<RatingsDTO> getRatingsByMemberId(@PathVariable int memberId) {
+        return ratingsService.getRatingsByMemberId(memberId);
+    }
+
 
 
 }
