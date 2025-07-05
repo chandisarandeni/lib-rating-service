@@ -25,7 +25,7 @@ public class RatingsService {
     @Autowired
     private RestTemplate restTemplate;
 
-    //get all ratings
+    // get all ratings
     public List<RatingsDTO> getAllRatings() {
         List<Ratings> ratingsList = ratingsRepository.findAll();
         return ratingsList.stream()
@@ -35,6 +35,14 @@ public class RatingsService {
     // get ratings by: member id
     public List<RatingsDTO> getRatingsByMemberId(int memberId) {
         List<Ratings> ratingsList = ratingsRepository.findRatingsByMemberId(memberId);
+        return ratingsList.stream()
+                .map(ratings -> modelMapper.map(ratings, RatingsDTO.class))
+                .toList();
+    }
+
+    // get ratings by: book id
+    public List<RatingsDTO> getRatngsByBookId(int bookId) {
+        List<Ratings> ratingsList = ratingsRepository.findRatingsByBookId(bookId);
         return ratingsList.stream()
                 .map(ratings -> modelMapper.map(ratings, RatingsDTO.class))
                 .toList();
