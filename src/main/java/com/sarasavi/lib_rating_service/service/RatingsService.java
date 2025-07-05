@@ -28,4 +28,13 @@ public class RatingsService {
                 .map(ratings -> modelMapper.map(ratings, RatingsDTO.class))
                 .toList();
     }
+    // get ratings by: member id
+    public List<RatingsDTO> getRatingsByMemberId(int memberId) {
+        List<Ratings> ratingsList = ratingsRepository.findRatingsByMemberId(memberId);
+        return ratingsList.stream()
+                .map(ratings -> modelMapper.map(ratings, RatingsDTO.class))
+                .toList();
+    }
+
+    
 }
