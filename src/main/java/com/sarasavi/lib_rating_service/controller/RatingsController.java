@@ -32,6 +32,9 @@ public class RatingsController {
         return ratingsService.getRatingsByMemberId(memberId);
     }
 
-
-
+    // Add a new rating
+    @PostMapping(path = "/ratings/add")
+    public RatingsDTO addRating(@RequestBody RatingsDTO ratingsDTO) {
+        return ratingsService.addRating(ratingsDTO);
+    }
 }
