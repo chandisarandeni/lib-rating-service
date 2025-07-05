@@ -32,6 +32,12 @@ public class RatingsController {
         return ratingsService.getRatingsByMemberId(memberId);
     }
 
+    // view ratings by book id
+    @GetMapping(path = "/ratings/book/{bookId}")
+    public List<RatingsDTO> getRatingsByBookId(@PathVariable int bookId) {
+        return ratingsService.getRatngsByBookId(bookId);
+    }
+
     // Add a new rating
     @PostMapping(path = "/ratings/add")
     public RatingsDTO addRating(@RequestBody RatingsDTO ratingsDTO) {
