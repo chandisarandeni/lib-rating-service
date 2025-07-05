@@ -10,6 +10,6 @@ public interface RatingsRepository extends JpaRepository<Ratings, Integer> {
 
     //find ratings by member id
     @Query("SELECT r FROM Ratings r WHERE r.memberId = ?1")
-    List<Ratings> findByMemberId(int memberId);
+    List<Ratings> findRatingsByMemberId(int memberId);
 
 }
