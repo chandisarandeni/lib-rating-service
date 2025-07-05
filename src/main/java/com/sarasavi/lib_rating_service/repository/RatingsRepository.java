@@ -12,4 +12,8 @@ public interface RatingsRepository extends JpaRepository<Ratings, Integer> {
     @Query("SELECT r FROM Ratings r WHERE r.memberId = ?1")
     List<Ratings> findRatingsByMemberId(int memberId);
 
+    // find avg rating of a book
+    @Query("SELECT AVG(r.stars) FROM Ratings r WHERE r.bookId = ?1")
+    Double findAverageRatingByBookId(int bookId);
+
 }
