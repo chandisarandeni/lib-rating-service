@@ -82,8 +82,36 @@ public class RatingsService {
         return modelMapper.map(savedRatings, RatingsDTO.class);
     }
 
-    //update rating
-    public RatingsDTO
+    // update existing rating and recalculate average rating
+    public RatingsDTO updateRating(int ratingId, RatingsDTO ratingsDTO) {
+        Ratings existingRatings = ratingsRepository.findById(ratingId)
+                .orElseThrow(() -> new RuntimeException("Rating not found with id: " + ratingId));
+
+        // Ensure ID is not overwritten
+        ratingsDTO.setRatingId(ratingId);
+        modelMapper.map(ratingsDTO, existingRatings);
+
+        Ratings updatedRatings = ratingsRepository.save(existingRatings);
+
+        // Recalculate the average rating for the book
+        Double avgRating = ratingsRepository.findAverageRatingByBookId(updatedRatings.getBookId());
+
+        // Build the URI with query parameter
+        URI uri = UriComponentsBuilder
+                .fromUriString("http://localhost:8080/api/v1/books/{bookId}/ratings")
+                .queryParam("avgRating", avgRating)
+                .buildAndExpand(updatedRatings.getBookId())
+                .toUri();
+
+        // Send PUT request to Book Service
+        try {
+            restTemplate.exchange(uri, HttpMethod.PUT, null, Void.class);
+        } catch (RestClientException e) {
+            System.err.println("Failed to update book rating: " + e.getMessage());
+        }
+
+        return modelMapper.map(updatedRatings, RatingsDTO.class);
+    }
 
 
 }

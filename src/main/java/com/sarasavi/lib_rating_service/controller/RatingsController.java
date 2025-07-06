@@ -47,4 +47,10 @@ public class RatingsController {
     public RatingsDTO addRating(@RequestBody RatingsDTO ratingsDTO) {
         return ratingsService.addRating(ratingsDTO);
     }
+
+    // update existing rating
+    @PutMapping(path = "/ratings/{ratingId}")
+    public RatingsDTO updateRating(@PathVariable int ratingId, @RequestBody RatingsDTO ratingsDTO) {
+        return ratingsService.updateRating(ratingId, ratingsDTO);
+    }
 }
