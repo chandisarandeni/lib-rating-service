@@ -24,6 +24,12 @@ public class RatingsController {
         return ratingsService.getAllRatings();
     }
 
+    // Get ratings by rating id
+    @GetMapping(path = "/ratings/{ratingId}")
+    public RatingsDTO getRatingsById(@PathVariable int ratingId) {
+        return ratingsService.getRatingsById(ratingId);
+    }
+
     //view ratings by member id
     @GetMapping(path = "/ratings/member/{memberId}")
     public List<RatingsDTO> getRatingsByMemberId(@PathVariable int memberId) {
