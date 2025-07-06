@@ -39,7 +39,7 @@ public class RatingsController {
     // view ratings by book id
     @GetMapping(path = "/ratings/book/{bookId}")
     public List<RatingsDTO> getRatingsByBookId(@PathVariable int bookId) {
-        return ratingsService.getRatngsByBookId(bookId);
+        return ratingsService.getRatingsByBookId(bookId);
     }
 
     // Add a new rating

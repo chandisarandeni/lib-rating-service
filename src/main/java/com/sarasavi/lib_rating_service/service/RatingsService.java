@@ -49,7 +49,7 @@ public class RatingsService {
     }
 
     // get ratings by: book id
-    public List<RatingsDTO> getRatngsByBookId(int bookId) {
+    public List<RatingsDTO> getRatingsByBookId(int bookId) {
         List<Ratings> ratingsList = ratingsRepository.findRatingsByBookId(bookId);
         return ratingsList.stream()
                 .map(ratings -> modelMapper.map(ratings, RatingsDTO.class))
