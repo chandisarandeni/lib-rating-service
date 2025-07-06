@@ -32,6 +32,14 @@ public class RatingsService {
                 .map(ratings -> modelMapper.map(ratings, RatingsDTO.class))
                 .toList();
     }
+
+    //get ratings by : rating id
+    public RatingsDTO getRatingsById(int ratingId) {
+        Ratings ratings = ratingsRepository.findById(ratingId)
+                .orElseThrow(() -> new RuntimeException("Rating not found with id: " + ratingId));
+        return modelMapper.map(ratings, RatingsDTO.class);
+    }
+
     // get ratings by: member id
     public List<RatingsDTO> getRatingsByMemberId(int memberId) {
         List<Ratings> ratingsList = ratingsRepository.findRatingsByMemberId(memberId);
@@ -73,6 +81,9 @@ public class RatingsService {
 
         return modelMapper.map(savedRatings, RatingsDTO.class);
     }
+
+    //update rating
+    public RatingsDTO
 
 
 }
